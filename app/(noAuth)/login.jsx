@@ -1,14 +1,13 @@
 // LoginScreen.js
 import React, { useState, useContext } from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { AuthContext } from '../AuthContext';
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Text } from '~/components/ui/text';
-import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-
-const GITHUB_AVATAR_URI = 'https://github.com/mrzachnugent.png';
+import { Image } from 'react-native';
+import logo from '../../assets/images/logo.png';
+import '../global.css';
 
 const LoginScreen = () => {
   const { login } = useContext(AuthContext);
@@ -34,22 +33,45 @@ const LoginScreen = () => {
     }
   };
 
+  const { width } = Dimensions.get('window');
+
   return (
-    <View>
-      <Input
-        placeholder='Username'
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize='none'
-        keyboardType='email-address'
-        className='mt-4'
-      />
+    <View className='flex-1 items-center justify-center bg-gray-100 px-4'>
+      <View className='flex-[6] items-center justify-center mb-16'>
+        <View className='align-center justify-center'>
+          <Image
+            source={logo}
+            style={{ width, height: 100, resizeMode: 'contain' }} // Usamos el ancho dinámico
+          />
+        </View>
+        <Text className='text-2xl font-bold text-gray-800'>Welcome Back!</Text>
+        <Text className='text-gray-600'>Log in to your account</Text>
+      </View>
 
-      <Input placeholder='Password' value={password} secureTextEntry onChangeText={setPassword} />
+      <View className='w-full max-w-sm flex-[4]'>
+        <Input
+          placeholder='Email'
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize='none'
+          keyboardType='email-address'
+          className='mb-4 border border-gray-300 rounded-lg py-2 px-3 bg-white text-gray-800'
+        />
+        <Input
+          placeholder='Password'
+          value={password}
+          secureTextEntry
+          onChangeText={setPassword}
+          className='mb-6 border border-gray-300 rounded-lg py-2 px-3 bg-white text-gray-800'
+        />
 
-      <Button onPress={handleLogin}>
-        <Text>Login</Text>
-      </Button>
+        <Button
+          onPress={handleLogin}
+          className='w-full bg-primary py-3 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700'
+        >
+          <Text className='text-white font-bold text-lg'>Login</Text>
+        </Button>
+      </View>
     </View>
   );
 };

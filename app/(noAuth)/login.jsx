@@ -1,7 +1,14 @@
 // LoginScreen.js
 import React, { useState, useContext } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View } from 'react-native';
 import { AuthContext } from '../AuthContext';
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Text } from '~/components/ui/text';
+import { Badge } from '~/components/ui/badge';
+import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
+
+const GITHUB_AVATAR_URI = 'https://github.com/mrzachnugent.png';
 
 const LoginScreen = () => {
   const { login } = useContext(AuthContext);
@@ -29,20 +36,20 @@ const LoginScreen = () => {
 
   return (
     <View>
-      <TextInput
+      <Input
         placeholder='Username'
         value={email}
         onChangeText={setEmail}
         autoCapitalize='none'
         keyboardType='email-address'
+        className='mt-4'
       />
-      <TextInput
-        placeholder='Password'
-        value={password}
-        secureTextEntry
-        onChangeText={setPassword}
-      />
-      <Button title='Login' onPress={handleLogin} />
+
+      <Input placeholder='Password' value={password} secureTextEntry onChangeText={setPassword} />
+
+      <Button onPress={handleLogin}>
+        <Text>Login</Text>
+      </Button>
     </View>
   );
 };

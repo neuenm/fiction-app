@@ -44,8 +44,8 @@ const LoginScreen = () => {
             style={{ width, height: 100, resizeMode: 'contain' }} // Usamos el ancho dinámico
           />
         </View>
-        <Text className='text-2xl font-bold text-gray-800'>Welcome Back!</Text>
-        <Text className='text-gray-600'>Log in to your account</Text>
+        <Text className='text-2xl font-bold text-gray-800'>Bienvenido!</Text>
+        <Text className='text-gray-600'>Inicia sesion para comenzar</Text>
       </View>
 
       <View className='w-full max-w-sm flex-[4]'>
@@ -58,7 +58,7 @@ const LoginScreen = () => {
           className='mb-4 border border-gray-300 rounded-lg py-2 px-3 bg-white text-gray-800'
         />
         <Input
-          placeholder='Password'
+          placeholder='Contraseña'
           value={password}
           secureTextEntry
           onChangeText={setPassword}

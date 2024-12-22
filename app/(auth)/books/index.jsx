@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../../AuthContext';
 import { useContext } from 'react';
 import BookCard from './components/bookCard';
+import { getBooksFromStorage } from '~/lib/utils';
+import fetchServer from '~/lib/fetchServer';
 
 export default function Index() {
   const [dataToRender, setDataToRender] = useState(null);
@@ -14,9 +16,10 @@ export default function Index() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/books');
-
-        const result = await response.json();
+        const result = await fetchServer({
+          url: 'books',
+          method: 'GET',
+        });
 
         saveBooksToStorage(result);
         return result;
@@ -44,32 +47,26 @@ export default function Index() {
     }
   };
 
-  const getBooksFromStorage = async () => {
-    try {
-      const storedBooks = await AsyncStorage.getItem('books');
-      return storedBooks ? JSON.parse(storedBooks) : [];
-    } catch (error) {
-      console.error('Error reading books: ', error);
-      return [];
-    }
-  };
-
   return (
     <ScrollView
-      className='flex bg-primary px-4 pt-10 pb-20'
+      className='flex bg-primary-100 px-4 pt-10 pb-20'
       contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}
     >
       <TouchableOpacity onPress={logout}>
         <Text>Logout</Text>
       </TouchableOpacity>
-      {dataToRender?.map((book, key) => (
-        <BookCard
-          book={book}
-          key={key}
-          selectedBook={selectedBook}
-          setSelectedBook={setSelectedBook}
-        />
-      ))}
+      {dataToRender?.length > 0 ? (
+        dataToRender.map((book, key) => (
+          <BookCard
+            book={book}
+            key={key}
+            selectedBook={selectedBook}
+            setSelectedBook={setSelectedBook}
+          />
+        ))
+      ) : (
+        <Text>No hay libros</Text>
+      )}
     </ScrollView>
   );
 }

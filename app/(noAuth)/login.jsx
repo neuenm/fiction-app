@@ -6,8 +6,9 @@ import { Text } from '~/components/ui/text';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { Image } from 'react-native';
-import logo from '../../assets/images/logo.png';
+import logo from '~/assets/images/logo.png';
 import '../global.css';
+import fetchServer from '~/lib/fetchServer';
 
 const LoginScreen = () => {
   const { login } = useContext(AuthContext);
@@ -16,13 +17,12 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:8080/login', {
+      const data = await fetchServer({
+        url: 'login',
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: { email, password },
       });
 
-      const data = await response.json();
       if (data.accessToken) {
         login(data.accessToken);
       } else {

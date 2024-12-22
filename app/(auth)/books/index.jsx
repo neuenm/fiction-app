@@ -1,13 +1,15 @@
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, ScrollView } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../../AuthContext';
 import { useContext } from 'react';
+import BookCard from './components/bookCard';
 
 export default function Index() {
   const [dataToRender, setDataToRender] = useState(null);
   const { logout } = useContext(AuthContext);
+  const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,12 +55,21 @@ export default function Index() {
   };
 
   return (
-    <View>
+    <ScrollView
+      className='flex bg-primary px-4 pt-10 pb-20'
+      contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}
+    >
       <TouchableOpacity onPress={logout}>
         <Text>Logout</Text>
       </TouchableOpacity>
-
-      {/* <Text>{dataToRender ? JSON.stringify(dataToRender) : 'Loading...'}</Text> */}
-    </View>
+      {dataToRender?.map((book, key) => (
+        <BookCard
+          book={book}
+          key={key}
+          selectedBook={selectedBook}
+          setSelectedBook={setSelectedBook}
+        />
+      ))}
+    </ScrollView>
   );
 }

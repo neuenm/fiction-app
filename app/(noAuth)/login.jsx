@@ -37,7 +37,7 @@ const LoginScreen = () => {
 
   return (
     <View className='flex-1 items-center justify-center bg-gray-100 px-4'>
-      <View className='flex-[6] items-center justify-center mb-16'>
+      <View className='flex-[6] items-center justify-center '>
         <View className='align-center justify-center'>
           <Image
             source={logo}

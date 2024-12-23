@@ -1,17 +1,16 @@
-// LoginScreen.js
 import React, { useState, useContext } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Image } from 'react-native';
+import fetchServer from '~/lib/fetchServer';
 import { AuthContext } from '../AuthContext';
 import { Text } from '~/components/ui/text';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import { Image } from 'react-native';
 import logo from '~/assets/images/logo.png';
 import '../global.css';
-import fetchServer from '~/lib/fetchServer';
 
 const LoginScreen = () => {
   const { login } = useContext(AuthContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -39,16 +38,14 @@ const LoginScreen = () => {
     <View className='flex-1 items-center justify-center bg-gray-100 px-4'>
       <View className='flex-[6] items-center justify-center '>
         <View className='align-center justify-center'>
-          <Image
-            source={logo}
-            style={{ width, height: 100, resizeMode: 'contain' }} // Usamos el ancho dinámico
-          />
+          <Image source={logo} style={{ width, height: 100, resizeMode: 'contain' }} />
         </View>
         <Text className='text-2xl font-bold text-gray-800'>Bienvenido!</Text>
         <Text className='text-gray-600'>Inicia sesion para comenzar</Text>
       </View>
 
       <View className='w-full max-w-sm flex-[4]'>
+        {/* TODO - implement FORM to handle login and validate Form */}
         <Input
           placeholder='Email'
           value={email}

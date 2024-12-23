@@ -16,3 +16,11 @@ export async function getBooksFromStorage() {
     return [];
   }
 }
+
+export async function saveBooksToStorage(books) {
+  try {
+    await AsyncStorage.setItem('books', JSON.stringify(books));
+  } catch (error) {
+    console.error('Error saving books: ', error);
+  }
+}

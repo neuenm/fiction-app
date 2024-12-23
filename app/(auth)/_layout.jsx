@@ -9,5 +9,10 @@ export default function PrivateLayout() {
     return <Redirect href='/(noAuth)/login' />;
   }
 
-  return <Stack />;
+  return (
+    <Stack>
+      <Stack.Screen name='books/index' options={{ title: 'Biblioteca' }} />
+      <Stack.Screen name='books/[id]/index' options={{ title: '' }} />
+    </Stack>
+  );
 }

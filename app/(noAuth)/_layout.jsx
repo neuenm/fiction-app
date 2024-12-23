@@ -9,5 +9,5 @@ export default function PublicLayout() {
     return <Redirect href='/(auth)/books' />;
   }
 
-  return <Stack />;
+  return <Stack screenOptions={{ headerShown: false }} />;
 }

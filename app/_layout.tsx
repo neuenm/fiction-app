@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack } from 'expo-router';
-import { AuthProvider } from './AuthContext';
+import AuthProvider from './AuthContext';
 import './global.css';
 
 export default function Layout() {

@@ -16,6 +16,8 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          100: 'hsl(var(--primary-100))',
+          50: 'hsl(var(--primary-50))',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -41,6 +43,7 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        papper: 'hsl(var(--papper))',
       },
       borderWidth: {
         hairline: hairlineWidth(),
